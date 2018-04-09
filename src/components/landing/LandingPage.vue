@@ -10,22 +10,26 @@
     <div class="uk-child-width-expand@s uk-text-center uk-card-secondary" uk-grid style="padding: 5% 5%;">
       <div>
         <div class="uk-card" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
-          lol
+          <h2>999</h2>
+          <h5>Users</h5>
         </div>
       </div>
       <div>
         <div class="uk-card" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
-          lol
+          <h2>999</h2>
+          <h5>Companies</h5>
         </div>
       </div>
       <div>
         <div class="uk-card" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
-          lol
+          <h2>999</h2>
+          <h5>Users</h5>
         </div>
       </div>
       <div>
         <div class="uk-card" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
-          lol
+          <h2>999</h2>
+          <h5>Companies</h5>
         </div>
       </div>
     </div>
