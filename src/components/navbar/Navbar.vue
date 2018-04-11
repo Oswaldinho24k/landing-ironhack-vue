@@ -3,7 +3,6 @@
 
     <vk-navbar-nav>
       <li class="uk-parent uk-active"><router-link to="/" >IronHack</router-link></li>
-
     </vk-navbar-nav>
 
     <vk-navbar-nav slot="right">
@@ -21,6 +20,8 @@
           <vk-nav-item title="Log Out"></vk-nav-item>
         </vk-navbar-nav-dropdown-nav>
       </vk-navbar-nav-dropdown>
+      <vk-navbar-nav-item title="|"></vk-navbar-nav-item>
+      <li class="uk-parent"><router-link to="/admin" >Admin</router-link></li>
     </vk-navbar-nav>
 
   </vk-navbar>

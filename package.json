@@ -16,6 +16,7 @@
     "firebase": "^4.12.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vuefire": "^1.4.5",
     "vuikit": "^0.8.2"
   },
   "devDependencies": {

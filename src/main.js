@@ -6,14 +6,17 @@ import router from './router'
 import firebase from 'firebase'
 import Vuikit from 'vuikit'
 import VuikitIcons from '@vuikit/icons'
-
+import VueFire from 'vuefire';
 
 import '@vuikit/theme'
 
 Vue.use(Vuikit)
 Vue.use(VuikitIcons)
+Vue.use(VueFire);
 
 Vue.config.productionTip = false
+
+
 
 const config = {
   apiKey: "AIzaSyDG6RhXSRZ1xrE4jjT3KDZxoMmD1WDQglE",
