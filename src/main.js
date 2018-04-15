@@ -23,7 +23,7 @@ const config = {
   authDomain: "ironhack-admin.firebaseapp.com",
   databaseURL: "https://ironhack-admin.firebaseio.com",
   projectId: "ironhack-admin",
-  storageBucket: "",
+  storageBucket: "gs://ironhack-admin.appspot.com/",
   messagingSenderId: "69631709491"
 };
 firebase.initializeApp(config);

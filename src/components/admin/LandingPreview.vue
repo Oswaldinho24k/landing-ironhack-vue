@@ -2,7 +2,7 @@
     <div>
       <vk-sticky bottom="#offset">
         <vk-card>
-          <router-link to="/admin" ><vk-button><vk-icon icon="file-edit"></vk-icon> Editar</vk-button></router-link>
+          <vk-button v-on:click="goBack"><vk-icon icon="file-edit"></vk-icon> Editar</vk-button>
           <router-link to="/" ><vk-button><vk-icon icon="home"></vk-icon> Home</vk-button></router-link>
 
 
@@ -26,6 +26,11 @@
     name: 'LandingPreview',
     data () {
       return {}
+    },
+    methods:{
+      goBack:function(){
+        this.$router.back()
+      }
     }
   }
 </script>

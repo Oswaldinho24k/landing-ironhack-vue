@@ -1,20 +1,31 @@
 <template>
   <div class="hello">
     <!--Main-->
-    <main-component></main-component>
+    <main-component
+      :show=landing.main.show
+      :image=landing.main.image
+      :message=landing.main.message></main-component>
     <!--Numbers-->
-    <numbers-component></numbers-component>
+    <numbers-component
+      :show="landing.numbers.show"
+      :list="landing.numbers.list"></numbers-component>
     <!--Cards-->
-    <cards-component></cards-component>
+    <cards-component
+    :show="landing.cards.show"
+    :list="landing.cards.list"></cards-component>
     <!--Message-->
     <message-component></message-component>
     <!--Image Background-->
-    <div class="uk-background-fixed uk-background-center-center uk-height-medium uk-width-large"
+    <!--<div class="uk-background-fixed uk-background-center-center uk-height-medium uk-width-large"
           style="width: 100%"
-         :style="{ 'background-image': 'url(' + landing.main.image + ')' }">
+         :style="{ 'background-image': 'url(' + landing.main.image + ')' }">-->
+    <div class="uk-background-fixed uk-background-center-center uk-height-medium uk-width-large"
+         style="width: 100%; background-image: url('https://scontent.fmex9-1.fna.fbcdn.net/v/t31.0-8/26910863_2117437818485111_1123558402019818654_o.jpg?_nc_cat=0&_nc_eui2=v1%3AAeGZesvyLOpObUZLjl9n5cVMa7JiQzuFgV6W_yi2IeW8OrNHRohvpBS0SL_rO-0N3HqcX1L674NSHbcqCOulZaQhxtg8erpA04ROIJZEU04dlQ&oh=bb52e7d4691500edd5abb7e85a4e9b5e&oe=5B63DF2D')">
     </div>
     <!--Testimonials-->
-    <testimonials-component></testimonials-component>
+    <testimonials-component
+      :show="landing.testimonials.show"
+      :list="landing.testimonials.list"></testimonials-component>
     <!--Footer-->
     <footer-component></footer-component>
 
@@ -45,12 +56,16 @@
     /*firebase:{
       landing:db.ref('landing')
     },*/
-    created(){
+    beforeMount(){
       this.getData()
     },
     data () {
       return {
-        landing:{},
+        landing:{
+          main:{},
+          numbers:{},
+
+        },
         lol:'perro'
       }
     },
@@ -66,14 +81,6 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
-  .hello{
-    min-height: 150vh;
-    max-width: 100%;
-  }
-  .test-img{
-    width:150px;
-    height: 150px;
-    border-radius: 50%;
-  }
+
 
 </style>

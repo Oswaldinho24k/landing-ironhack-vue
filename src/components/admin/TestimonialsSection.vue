@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Cards </h2>
+    <h2>Testimonials</h2>
     <loader v-if="loader"></loader>
     <form action="" class="uk-form-horizontal uk-margin-medium" v-on:submit="saveData">
 
@@ -10,9 +10,9 @@
           <button
             id="button"
             v-on:click="handleComponent"
-            v-model="cards.show"
+            v-model="testimonials.show"
             class="uk-button uk-button-default uk-form-width-large"
-            type="button" >{{cards.show}}</button>
+            type="button" >{{testimonials.show}}</button>
         </div>
       </div>
       <hr class="uk-divider-icon">
@@ -44,8 +44,8 @@
       </div>
 
       <div class="uk-child-width-expand@s uk-text-center" uk-grid style="position: relative;">
-        <div v-for="item in cards.list">
-          <div class="uk-card uk-card-default uk-grid-margin myclass">
+        <div v-for="item in testimonials.list">
+          <div class="uk-card uk-grid-margin myclass">
             <vk-icon-button  v-on:click="deleteCard(item.key)"
                              class="uk-margin-small-top uk-margin-small-right"
                              style="position: absolute;top:0; right:0" icon="trash"></vk-icon-button>
@@ -76,7 +76,7 @@
   import firebase from 'firebase'
   import Loader from '../common/Loader.vue'
   export default {
-    name: 'CardsSection',
+    name: 'TestimonialsSection',
     components:{Loader},
     data () {
       return {
@@ -89,7 +89,7 @@
         },
         loader:false,
         disable:true,
-        cards:{
+        testimonials:{
           list:[],
           show:true
         }
@@ -100,20 +100,20 @@
     },
     methods:{
       getData:function(){
-        firebase.database().ref('landing/cards').on('value', (res)=>{
-          this.cards = res.val();
+        firebase.database().ref('landing/testimonials').on('value', (res)=>{
+          this.testimonials = res.val();
         })
       },
       handleComponent:function(){
-        this.cards.show = !this.cards.show
+        this.testimonials.show = !this.testimonials.show
       },
       deleteCard:function(key){
-        //this.$delete(this.cards.list, key);
+        //this.$delete(this.testimonials.list, key);
         let updates = {}
-        updates[`landing/cards/list/${key}`] = null;
+        updates[`landing/testimonials/list/${key}`] = null;
         firebase.database().ref().update(updates)
           .then(r=>{
-            firebase.storage().ref(`cards/${key}`).delete()
+            firebase.storage().ref(`testimonials/${key}`).delete()
               .then(r=>{
 
               }).catch(e=>{
@@ -126,7 +126,7 @@
       addCard:function(){
         let updates = {}
 
-        updates[`landing/cards/list/${this.newCard.key}`] = this.newCard;
+        updates[`landing/testimonials/list/${this.newCard.key}`] = this.newCard;
         firebase.database().ref().update(updates)
           .then(r=>{
             this.newCard = {};
@@ -137,7 +137,7 @@
       },
       saveData:function(e){
         e.preventDefault()
-        firebase.database().ref('/landing/cards').set(this.cards)
+        firebase.database().ref('/landing/testimonials').set(this.testimonials)
           .then(r=>{
             this.messages.push({message:`Cards Actualizados`, status:'success'})
           }).catch(e=>{
@@ -148,7 +148,7 @@
         console.log(e.target.files[0])
         let key = firebase.database().ref().push().key
         this.newCard['key'] = key
-        let uploadTask = firebase.storage().ref(`cards/${key}`).put(e.target.files[0])
+        let uploadTask = firebase.storage().ref(`testimonials/${key}`).put(e.target.files[0])
 
         uploadTask.on('state_changed', (snapshot)=>{
           // Observe state change events such as progress, pause, and resume

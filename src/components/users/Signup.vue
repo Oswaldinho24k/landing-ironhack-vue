@@ -80,7 +80,7 @@
                 email:r.email
               }
               this.saveUser(user)
-              this.messages.push({message:`Bienvenido ${r.email}`, status:'success'})
+              this.messages.push({message:`Se ha registrado a  ${r.email} con éxito`, status:'success'})
             })
             .catch((error)=> {
               this.messages.push({message:` ${error.message}`, status:'danger'})

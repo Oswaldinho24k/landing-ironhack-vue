@@ -5,8 +5,10 @@ import Signup from '@/components/users/Signup'
 import Login from '@/components/users/Login'
 import AdminPage from '@/components/admin/AdminPage'
 import MainSection from '@/components/admin/MainSection'
+import NumbersSection from '@/components/admin/NumbersSection'
 import CardsSection from '@/components/admin/CardsSection'
 import LandingPreview from '@/components/admin/LandingPreview'
+import TestimonialsSection  from '@/components/admin/TestimonialsSection'
 
 
 
@@ -47,10 +49,10 @@ export default new Router({
 
         { path: 'navbar', component: MainSection },
         { path: 'main', component: MainSection },
-        { path: 'numbers', component: MainSection },
+        { path: 'numbers', component: NumbersSection },
         { path: 'cards', component: CardsSection },
         { path: 'message', component: MainSection },
-        { path: 'testimonials', component: MainSection },
+        { path: 'testimonials', component: TestimonialsSection },
         { path: 'footer', component: MainSection },
       ]
     }
