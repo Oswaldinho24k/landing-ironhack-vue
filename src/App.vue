@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar/>
+    <navbar></navbar>
     <div class="main">
       <router-view/>
     </div>
@@ -8,13 +8,13 @@
 </template>
 
 <script>
+
+
+  import firebase from 'firebase'
   import Navbar from './components/navbar/Navbar.vue'
 export default {
   name: 'App',
   components:{Navbar},
-  beforeCreate(){
-    console.log('lolx')
-  },
 }
 </script>
 
@@ -36,7 +36,7 @@ export default {
     align-items: center;
     min-height: calc(100vh - 100px);
     margin-top: -100px;
-
+    padding: 0 5%;
   }
   .main .log-container .uk-card-body{
     background-color: #f8f8f88;

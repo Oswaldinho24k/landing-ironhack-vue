@@ -58,7 +58,7 @@
             let displayText =''
             r.displayName?displayText=r.displayName:displayText=r.email;
             this.messages.push({message:`Bienvenido ${displayText}`, status:'success'})
-            this.$router.push('/admin/main')
+            this.$router.push('/admin/')
           })
           .catch((error)=> {
             this.messages.push({message:` ${error.message}`, status:'danger'})

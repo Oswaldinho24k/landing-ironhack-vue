@@ -9,12 +9,17 @@ import NumbersSection from '@/components/admin/NumbersSection'
 import CardsSection from '@/components/admin/CardsSection'
 import LandingPreview from '@/components/admin/LandingPreview'
 import TestimonialsSection  from '@/components/admin/TestimonialsSection'
-
+import MessageSection  from '@/components/admin/MessageSection'
+import PagesList from '@/components/admin/PagesList'
+import NotFound from '@/components/NotFound'
 
 
 Vue.use(Router)
+//console.log(this.a.history.current.params)
 
-export default new Router({
+
+
+ const router = new Router({
   routes: [
     // {
     //   path: '/',
@@ -23,26 +28,31 @@ export default new Router({
     // },
     {
       path: '/',
-      name: 'LandingPage',
-      component: LandingPage
+      name: 'PagesList',
+      component: PagesList,
+    },
+    {
+      path:'/pages/:page',
+      name:'pages',
+      component:LandingPage,
     },
     {
       path: '/signup',
       name: 'Signup',
       component: Signup,
-      props:true
     },
     {
       path: '/login',
       name: 'Login',
       component: Login,
-      props:true
+
     },
     { path: '/preview',
       component: LandingPreview
     },
-    {
-      path:'/admin',
+
+   {
+      path:'/admin/:page',
       name: 'AdminPage',
       component: AdminPage,
       children: [
@@ -51,10 +61,17 @@ export default new Router({
         { path: 'main', component: MainSection },
         { path: 'numbers', component: NumbersSection },
         { path: 'cards', component: CardsSection },
-        { path: 'message', component: MainSection },
+        { path: 'message', component: MessageSection },
         { path: 'testimonials', component: TestimonialsSection },
         { path: 'footer', component: MainSection },
       ]
+    },
+    {
+      path:'*',
+      component:NotFound
     }
+
 ]
 })
+
+export default router

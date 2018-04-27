@@ -1,5 +1,5 @@
 <template>
-  <vk-navbar style="position: fixed; z-index: 980; width: 100%">
+  <vk-navbar style=" z-index: 980; width: 100%">
 
     <vk-navbar-nav>
       <li class="uk-parent uk-active uk-logo"><router-link to="/" >
@@ -9,19 +9,19 @@
     </vk-navbar-nav>
 
     <vk-navbar-nav slot="center">
-      <li class="uk-parent uk-active uk-logo"><router-link to="/" >Iron Hack Rules</router-link></li>
+      <li class="uk-parent uk-active uk-logo"><router-link to="/" >Admin</router-link></li>
     </vk-navbar-nav>
 
 
     <vk-navbar-nav slot="right">
-      <li v-show="!logged" class="uk-parent"><router-link to="/login" >Log In</router-link></li>
 
+      <!--<li v-show="!logged" class="uk-parent"><router-link to="/login" >Log In</router-link></li>-->
 
       <vk-navbar-nav-dropdown title="Admin" v-show="logged">
         <vk-navbar-nav-dropdown-nav>
           <li class="uk-parent uk-active">{{user}}</li>
 
-          <li class="uk-parent uk-active"><router-link to="/admin/main" >Admin</router-link></li>
+          <li class="uk-parent uk-active"><router-link to="/admin/" >Admin</router-link></li>
           <li class="uk-parent uk-active"><router-link to="/signup" >Register</router-link></li>
           <vk-nav-item-divider></vk-nav-item-divider>
 
@@ -77,7 +77,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .nav-logo{
-    width: 50px;
+    width: 30px;
   }
 
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <nav-component></nav-component>
     <!--Main-->
     <main-component
       :show=landing.main.show
@@ -14,13 +15,18 @@
     :show="landing.cards.show"
     :list="landing.cards.list"></cards-component>
     <!--Message-->
-    <message-component></message-component>
+    <message-component
+    :text="landing.message.text"
+    :title="landing.message.title"
+    :show="landing.message.show"></message-component>
     <!--Image Background-->
     <!--<div class="uk-background-fixed uk-background-center-center uk-height-medium uk-width-large"
           style="width: 100%"
          :style="{ 'background-image': 'url(' + landing.main.image + ')' }">-->
     <div class="uk-background-fixed uk-background-center-center uk-height-medium uk-width-large"
-         style="width: 100%; background-image: url('https://scontent.fmex9-1.fna.fbcdn.net/v/t31.0-8/26910863_2117437818485111_1123558402019818654_o.jpg?_nc_cat=0&_nc_eui2=v1%3AAeGZesvyLOpObUZLjl9n5cVMa7JiQzuFgV6W_yi2IeW8OrNHRohvpBS0SL_rO-0N3HqcX1L674NSHbcqCOulZaQhxtg8erpA04ROIJZEU04dlQ&oh=bb52e7d4691500edd5abb7e85a4e9b5e&oe=5B63DF2D')">
+         style="width: 100%;"
+          :style="{ 'background-image': 'url(' + landing.main.image + ')' }">
+
     </div>
     <!--Testimonials-->
     <testimonials-component
@@ -42,10 +48,14 @@
   import MessageComponent from './MessageComponent.vue'
   import TestimonialsComponent from './TestimonialsComponent.vue'
   import FooterComponent from './FooterComponent.vue'
+  import Navbar from '../navbar/Navbar.vue'
+  import NavComponent from './NavComponent.vue'
 
   export default {
     name: 'LandingPage',
     components:{
+      NavComponent,
+      Navbar,
       MainComponent,
       NumbersComponent,
       CardsComponent,
@@ -58,22 +68,55 @@
     },*/
     beforeMount(){
       this.getData()
+      console.log(this.$route)
     },
     data () {
       return {
         landing:{
-          main:{},
-          numbers:{},
+          main:{
+            show:true,
+            list:[],
+            message:'',
+            img:''
+          },
+          numbers:{
+            show:true,
+            list:[],
+            message:'',
+            img:''
+          },
+          cards:{
+            show:true,
+            list:[],
+            message:'',
+            img:''
+          },
+          message:{
+            show:true,
+            list:[],
+            message:'',
+            img:''
+          },
+          testimonials:{
+            show:true,
+            list:[],
+            message:'',
+            img:''
+          }
+
 
         },
-        lol:'perro'
       }
     },
     methods: {
       getData:function(){
-        firebase.database().ref('landing').on('value', (res)=>{
+        firebase.database().ref(`/pages/${this.$route.params.page}`).on('value', (res)=>{
           console.log(res.val())
-          this.landing = res.val()
+          if(res.val()===null){
+            this.$router.push('/not-found')
+          }else{
+            this.landing = res.val()
+          }
         })
       }
     }

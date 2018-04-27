@@ -59,8 +59,23 @@
         }
       }
     },
-
+    beforeMount(){
+      this.checkIfUser()
+    },
     methods: {
+      checkIfUser:function(){
+        firebase.auth().onAuthStateChanged(user=>{
+          if(user){
+            console.log(user)
+            this.user = user.email
+            this.logged = true
+          }else{
+            console.log('nel')
+            this.logged = false
+            this.$router.push('/')
+          }
+        })
+      },
       saveUser:function(user){
         firebase.database().ref(`/users/${user.uid}`).set(user)
           .then(r=>{console.log(r)})
@@ -73,7 +88,9 @@
         if(this.user.password2!==this.user.password){
           this.errors.push('Las contraseñas no coinciden')
         }else{
-          firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
+          firebase.auth().createUserWithEmailAndPassword(
+
+          )
             .then(r=>{
               let user = {
                 uid:r.uid,

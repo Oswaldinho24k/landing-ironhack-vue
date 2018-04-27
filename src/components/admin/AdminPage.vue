@@ -85,7 +85,7 @@
           }else{
             console.log('nel')
             this.logged = false
-            this.$router.push('/')
+            this.$router.push('/login')
           }
         })
       },

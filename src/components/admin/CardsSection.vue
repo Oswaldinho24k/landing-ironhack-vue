@@ -27,7 +27,7 @@
       <div class="uk-margin">
         <label class="uk-form-label" for="the-text">Text</label>
         <div class="">
-          <input class="uk-input uk-form-width-large" id="the-text" type="text" placeholder="Some text..." v-model="newCard.text">
+          <textarea class="uk-textarea uk-form-width-large" id="the-text" type="text" placeholder="Some text..." v-model="newCard.text"></textarea>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
       </div>
 
       <div class="uk-margin">
-        <vk-button htmlType="button" default class="uk-width-1-1" v-on:click="addCard">Add</vk-button>
+        <vk-button htmlType="button" default class="uk-width-1-1" v-on:click="addCard" v-bind:disabled="handleButton">Add</vk-button>
       </div>
 
       <div class="uk-child-width-expand@s uk-text-center" uk-grid style="position: relative;">
@@ -93,6 +93,12 @@
           list:[],
           show:true
         }
+      }
+    },
+    computed:{
+      handleButton: function() {
+        this.newCard.image?this.disable=false:this.disable=true;
+        return this.disable;
       }
     },
     beforeMount(){

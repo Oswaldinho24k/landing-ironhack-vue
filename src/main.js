@@ -6,13 +6,13 @@ import router from './router'
 import firebase from 'firebase'
 import Vuikit from 'vuikit'
 import VuikitIcons from '@vuikit/icons'
-import VueFire from 'vuefire';
+//import VueFire from 'vuefire';
 
 import '@vuikit/theme'
 
 Vue.use(Vuikit)
 Vue.use(VuikitIcons)
-Vue.use(VueFire);
+//Vue.use(VueFire);
 
 Vue.config.productionTip = false
 
@@ -27,6 +27,21 @@ const config = {
   messagingSenderId: "69631709491"
 };
 firebase.initializeApp(config);
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (requiresAuth && !currentUser) {
+    next('/login');
+    console.log(currentUser)
+  } else if (requiresAuth && currentUser) {
+    next();
+    console.log(currentUser)
+  } else {
+    next();
+    console.log(currentUser)
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({
