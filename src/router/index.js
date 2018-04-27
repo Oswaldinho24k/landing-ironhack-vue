@@ -52,7 +52,7 @@ Vue.use(Router)
     },
 
    {
-      path:'/admin/:page',
+      path:'/admin/:page/',
       name: 'AdminPage',
       component: AdminPage,
       children: [

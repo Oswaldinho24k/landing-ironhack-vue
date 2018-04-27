@@ -106,8 +106,9 @@
     },
     methods:{
       getData:function(){
-        firebase.database().ref('landing/cards').on('value', (res)=>{
+        firebase.database().ref(`/pages/${this.$route.params.page}/cards`).on('value', (res)=>{
           this.cards = res.val();
+          console.log(res.val())
         })
       },
       handleComponent:function(){
@@ -116,7 +117,7 @@
       deleteCard:function(key){
         //this.$delete(this.cards.list, key);
         let updates = {}
-        updates[`landing/cards/list/${key}`] = null;
+        updates[`/pages/${this.$route.params.page}/cards/list/${key}`] = null;
         firebase.database().ref().update(updates)
           .then(r=>{
             firebase.storage().ref(`cards/${key}`).delete()
@@ -132,7 +133,7 @@
       addCard:function(){
         let updates = {}
 
-        updates[`landing/cards/list/${this.newCard.key}`] = this.newCard;
+        updates[`/pages/${this.$route.params.page}/cards/list/${this.newCard.key}`] = this.newCard;
         firebase.database().ref().update(updates)
           .then(r=>{
             this.newCard = {};
@@ -143,7 +144,7 @@
       },
       saveData:function(e){
         e.preventDefault()
-        firebase.database().ref('/landing/cards').set(this.cards)
+        firebase.database().ref(`/pages/${this.$route.params.page}/cards`).set(this.cards)
           .then(r=>{
             this.messages.push({message:`Cards Actualizados`, status:'success'})
           }).catch(e=>{
@@ -154,7 +155,7 @@
         console.log(e.target.files[0])
         let key = firebase.database().ref().push().key
         this.newCard['key'] = key
-        let uploadTask = firebase.storage().ref(`cards/${key}`).put(e.target.files[0])
+        let uploadTask = firebase.storage().ref(`/pages/${this.$route.params.page}/cards/${key}`).put(e.target.files[0])
 
         uploadTask.on('state_changed', (snapshot)=>{
           // Observe state change events such as progress, pause, and resume

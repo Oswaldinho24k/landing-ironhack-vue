@@ -85,11 +85,12 @@
       }
     },
     beforeMount(){
+      console.log(this.$route)
       this.getData()
     },
     methods:{
       getData:function(){
-        firebase.database().ref('landing/main').on('value', (res)=>{
+        firebase.database().ref(`/pages/${this.$route.params.page}/main`).on('value', (res)=>{
           console.log(res.val())
           this.main = res.val()
         })
@@ -99,7 +100,7 @@
       },
       saveData:function(e){
         e.preventDefault()
-        firebase.database().ref('landing/main').set(this.main)
+        firebase.database().ref(`/pages/${this.$route.params.page}/main`).set(this.main)
           .then(r=>{
             this.messages.push({message:` Info de esta sección actualizada ;)`, status:'success'})
           }).catch(e=>{
@@ -108,7 +109,7 @@
       },
       uploadImage:function(e){
         console.log(e.target.files[0])
-        let uploadTask = firebase.storage().ref('main/image').put(e.target.files[0])
+        let uploadTask = firebase.storage().ref(`/pages/${this.$route.params.page}/main`).put(e.target.files[0])
 
         uploadTask.on('state_changed', (snapshot)=>{
           // Observe state change events such as progress, pause, and resume
