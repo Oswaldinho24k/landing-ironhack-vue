@@ -53,17 +53,17 @@ Vue.use(Router)
 
    {
       path:'/admin/:page/',
-      name: 'AdminPage',
+      name: 'adminpage',
       component: AdminPage,
       children: [
 
-        { path: 'navbar', component: MainSection },
-        { path: 'main', component: MainSection },
-        { path: 'numbers', component: NumbersSection },
-        { path: 'cards', component: CardsSection },
-        { path: 'message', component: MessageSection },
-        { path: 'testimonials', component: TestimonialsSection },
-        { path: 'footer', component: MainSection },
+        { path: 'navbar', name:'admin-nav', component: MainSection },
+        { path: 'main', name:'admin-main',component: MainSection },
+        { path: 'numbers', name:'admin-numb',component: NumbersSection },
+        { path: 'cards', name:'admin-cards',component: CardsSection },
+        { path: 'message', name:'admin-mess',component: MessageSection },
+        { path: 'testimonials',name:'admin-test', component: TestimonialsSection },
+        { path: 'footer', name:'admin-footer',component: MainSection },
       ]
     },
     {

@@ -1,6 +1,16 @@
 <template>
   <div id="app">
-    <navbar></navbar>
+    <vk-icon-button @click="show = true" class="meu-boton" icon="menu" v-show="logged">
+
+    </vk-icon-button>
+    <vk-offcanvas-content>
+
+
+      <vk-offcanvas flipped  :show.sync="show" class="mi-canvas">
+        <vk-offcanvas-close @click="show = false"></vk-offcanvas-close>
+        <navbar></navbar>
+      </vk-offcanvas>
+    </vk-offcanvas-content>
     <div class="main">
       <router-view/>
     </div>
@@ -12,9 +22,38 @@
 
   import firebase from 'firebase'
   import Navbar from './components/navbar/Navbar.vue'
+  import VkIcon from 'vuikit/src/library/icon/components/icon'
 export default {
   name: 'App',
-  components:{Navbar},
+  components:{
+    VkIcon,
+    Navbar},
+  data(){
+    return{
+      logged:false,
+      show:false
+
+    }
+  },
+  beforeMount(){
+    this.checkIfUser()
+  },
+  methods:{
+    checkIfUser:function(){
+      firebase.auth().onAuthStateChanged(user=>{
+        if(user){
+          console.log(user)
+          this.user = user.email
+          this.logged = true
+        }else{
+          console.log('nel')
+          this.logged = false
+          this.show=false
+
+        }
+      })
+    },
+  },
 }
 </script>
 
@@ -25,11 +64,16 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    position: relative;
 
   }
-  .main{
-
+  .meu-boton{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
   }
+
   .main .log-container{
     display: flex;
     justify-content: center;
@@ -40,5 +84,8 @@ export default {
   }
   .main .log-container .uk-card-body{
     background-color: #f8f8f88;
+  }
+  .mi-canvas{
+
   }
 </style>

@@ -120,9 +120,9 @@
         updates[`/pages/${this.$route.params.page}/cards/list/${key}`] = null;
         firebase.database().ref().update(updates)
           .then(r=>{
-            firebase.storage().ref(`cards/${key}`).delete()
+            firebase.storage().ref(`/pages/${this.$route.params.page}/cards/${key}`).delete()
               .then(r=>{
-
+                this.messages.push({message:`Card Eliminada`, status:'success'})
               }).catch(e=>{
               this.messages.push({message:` ${e.message}`, status:'danger'})
             })

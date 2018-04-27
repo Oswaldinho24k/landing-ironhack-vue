@@ -82,7 +82,7 @@
     },
     methods:{
       getData:function(){
-        firebase.database().ref('landing/numbers').on('value', (res)=>{
+        firebase.database().ref(`/pages/${this.$route.params.page}/numbers`).on('value', (res)=>{
           this.numbers = res.val();
         })
       },
@@ -92,10 +92,10 @@
       deleteCard:function(key){
         //this.$delete(this.cards.list, key);
         let updates = {}
-        updates[`landing/numbers/list/${key}`] = null;
+        updates[`/pages/${this.$route.params.page}/numbers/list/${key}`] = null;
         firebase.database().ref().update(updates)
           .then(r=>{
-
+            this.messages.push({message:` Deleted`, status:'success'})
           }).catch(e=>{
           this.messages.push({message:` ${e.message}`, status:'danger'})
         })
@@ -104,20 +104,19 @@
         let updates = {}
         let key = firebase.database().ref().push().key
         this.newCard['key'] = key
-        updates[`landing/numbers/list/${key}`] = this.newCard;
+        updates[`/pages/${this.$route.params.page}/numbers/list/${key}`] = this.newCard;
         firebase.database().ref().update(updates)
           .then(r=>{
             this.newCard = {};
           }).catch(e=>{
           this.messages.push({message:` ${e.message}`, status:'danger'})
         })
-
       },
       saveData:function(e){
         e.preventDefault()
-        firebase.database().ref('/landing/numbers').set(this.numbers)
+        firebase.database().ref(`/pages/${this.$route.params.page}/numbers`).set(this.numbers)
           .then(r=>{
-            this.messages.push({message:`Stats Actualizados`, status:'success'})
+            this.messages.push({message:'Stats Actualizados', status:'success'})
           }).catch(e=>{
           this.messages.push({message:` ${e.message}`, status:'danger'})
         })

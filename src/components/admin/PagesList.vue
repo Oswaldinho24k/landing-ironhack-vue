@@ -1,14 +1,18 @@
 <template>
+  <div>
+  <vk-card type="secondary">
+    <vk-card-title>Find anything about Ironhack and our community</vk-card-title>
+  </vk-card>
     <div class="page-list">
-      <h1>PagesList</h1>
+
       <div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-text-center" uk-grid-parallax="translate:200">
         <div div v-for="p in pages">
 
-           <card-page :p="p"></card-page>
+           <card-page :p="p" :logged="logged"></card-page>
 
         </div>
       </div>
-      <vk-button @click="show = true" size="large" type="secondary" class="page-list-button">
+      <vk-button @click="show = true" size="large" type="secondary" class="page-list-button" v-show="logged">
         <vk-icon icon="plus"></vk-icon>
       </vk-button>
 
@@ -45,6 +49,7 @@
       </vk-notification>
 
     </div>
+  </div>
 </template>
 
 <script>
@@ -56,6 +61,8 @@
     data () {
       return {
         messages:[],
+        logged:false,
+        user:{},
         pages:[],
         show:false,
         newPage:{
@@ -129,6 +136,7 @@
       }
     },
     beforeMount(){
+      this.checkIfUser()
       firebase.database().ref('pages').on('value', res=>{
         console.log(res.val())
         this.pages = res.val()
@@ -153,6 +161,19 @@
           this.messages.push({message:` ${e.message} ;)`, status:'error'})
         })
       },
+      checkIfUser:function(){
+        firebase.auth().onAuthStateChanged(user=>{
+          if(user){
+            console.log(user)
+            this.user = user.email
+            this.logged = true
+          }else{
+            console.log('nel')
+            this.logged = false
+
+          }
+        })
+      },
 
     },
   }
@@ -161,11 +182,13 @@
 <style scoped>
   .page-list{
     position: relative;
+    padding: 2% 5%;
   }
   .page-list-button{
     position: fixed;
     bottom: 50px;
     right:50px;
   }
+
 
 </style>

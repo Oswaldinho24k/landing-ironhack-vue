@@ -106,7 +106,7 @@
     },
     methods:{
       getData:function(){
-        firebase.database().ref('landing/testimonials').on('value', (res)=>{
+        firebase.database().ref(`/pages/${this.$route.params.page}/testimonials`).on('value', (res)=>{
           this.testimonials = res.val();
         })
       },
@@ -116,7 +116,7 @@
       deleteCard:function(key){
         //this.$delete(this.testimonials.list, key);
         let updates = {}
-        updates[`landing/testimonials/list/${key}`] = null;
+        updates[`/pages/${this.$route.params.page}/testimonials/list/${key}`] = null;
         firebase.database().ref().update(updates)
           .then(r=>{
             firebase.storage().ref(`testimonials/${key}`).delete()
@@ -132,7 +132,7 @@
       addCard:function(){
         let updates = {}
 
-        updates[`landing/testimonials/list/${this.newCard.key}`] = this.newCard;
+        updates[`/pages/${this.$route.params.page}/testimonials/list/${this.newCard.key}`] = this.newCard;
         firebase.database().ref().update(updates)
           .then(r=>{
             this.newCard = {};
@@ -143,7 +143,7 @@
       },
       saveData:function(e){
         e.preventDefault()
-        firebase.database().ref('/landing/testimonials').set(this.testimonials)
+        firebase.database().ref('`/pages/${this.$route.params.page}/testimonials').set(this.testimonials)
           .then(r=>{
             this.messages.push({message:`Cards Actualizados`, status:'success'})
           }).catch(e=>{

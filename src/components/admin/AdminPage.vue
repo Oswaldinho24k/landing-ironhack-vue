@@ -3,12 +3,16 @@
     <div v-bind:class="addPadding">
 
       <div style="display: flex; justify-content: flex-start; position:fixed">
-
         <vk-icon-button  @click="show = !show" v-bind:icon="changeIcon" class="uk-margin-large-top uk-margin-medium-left"></vk-icon-button>
-        <router-link to="/preview" >
+        <router-link :to="{name:'pages',  params:{page:pagina}}" >
           <vk-icon-button icon="laptop" class="uk-margin-large-top uk-margin-small-left"></vk-icon-button>
         </router-link>
 
+
+
+      </div>
+      <div class="contenido">
+        <h1>Editando la página {{pagina}}</h1>
       </div>
 
       <div>
@@ -22,19 +26,19 @@
             <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
               <h2>Sections</h2>
               <li class="uk-nav-divider"></li>
-              <!--<li class="uk-nav-header"><router-link to="/admin/navbar" >Navbar</router-link></li>
-              <li class="uk-nav-divider"></li>-->
-              <li class="uk-nav-header"><router-link to="/admin/main" >Main</router-link></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-nav',  params:{page:pagina}}" >Navbar</router-link></li>
               <li class="uk-nav-divider"></li>
-              <li class="uk-nav-header"><router-link to="/admin/numbers" >Stats</router-link></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-main',  params:{page:pagina}}" >Main</router-link></li>
               <li class="uk-nav-divider"></li>
-              <li class="uk-nav-header"><router-link to="/admin/cards" >Cards</router-link></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-numb',  params:{page:pagina}}" >Stats</router-link></li>
               <li class="uk-nav-divider"></li>
-              <li class="uk-nav-header"><router-link to="/admin/message" >Message</router-link></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-cards',  params:{page:pagina}}" >Cards</router-link></li>
               <li class="uk-nav-divider"></li>
-              <li class="uk-nav-header"><router-link to="/admin/testimonials" >Testimonials</router-link></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-mess',  params:{page:pagina}}" >Message</router-link></li>
               <li class="uk-nav-divider"></li>
-              <li class="uk-nav-header"><router-link to="/admin/footer" >Footer</router-link></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-test',  params:{page:pagina}}" >Testimonials</router-link></li>
+              <li class="uk-nav-divider"></li>
+              <li class="uk-nav-header"><router-link :to="{name:'admin-footer',  params:{page:pagina}}" >Footer</router-link></li>
             </ul>
           </vk-offcanvas>
         </vk-offcanvas-content>
@@ -61,10 +65,13 @@
       return {
         landing:{},
         show:false,
+        pagina:''
       }
     },
     beforeMount(){
       this.checkIfUser()
+      console.log(this.$route)
+      this.pagina=this.$route.params.page;
     },
 
     computed: {
@@ -107,4 +114,11 @@
     transition: all .3s ease;
   }
 
+  .contenido{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

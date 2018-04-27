@@ -34,6 +34,11 @@
       :list="landing.testimonials.list"></testimonials-component>
     <!--Footer-->
     <footer-component></footer-component>
+    <router-link :to="{name:'adminpage',  params:{page:pagina}}">
+      <vk-button size="large" type="secondary" class="page-list-button" v-show="logged">
+        <vk-icon icon="pencil"></vk-icon>
+      </vk-button>
+    </router-link>
 
   </div>
 </template>
@@ -67,11 +72,15 @@
       landing:db.ref('landing')
     },*/
     beforeMount(){
+      this.checkIfUser()
       this.getData()
       console.log(this.$route)
+      this.pagina = this.$route.params.page;
     },
     data () {
       return {
+        pagina:'',
+        logged:false,
         landing:{
           main:{
             show:true,
@@ -109,6 +118,19 @@
       }
     },
     methods: {
+      checkIfUser:function(){
+        firebase.auth().onAuthStateChanged(user=>{
+          if(user){
+            console.log(user)
+            this.user = user.email
+            this.logged = true
+          }else{
+            console.log('nel')
+            this.logged = false
+
+          }
+        })
+      },
       getData:function(){
         firebase.database().ref(`/pages/${this.$route.params.page}`).on('value', (res)=>{
           console.log(res.val())
@@ -123,7 +145,17 @@
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
+<style scoped>
+  .hello{
 
-
+  }
+  .page-list-button{
+    position: fixed;
+    bottom:50px;
+    right: 50px;
+  }
+  .page-list-button a{
+    color: white;
+    text-decoration: none;
+  }
 </style>

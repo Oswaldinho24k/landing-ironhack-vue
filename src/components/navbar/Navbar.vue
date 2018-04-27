@@ -1,38 +1,20 @@
 <template>
-  <vk-navbar style=" z-index: 980; width: 100%">
+  <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
+    <li class=" uk-active uk-logo">
+      <router-link to="/" >
+      <img class="nav-logo"
+           src="https://static1.squarespace.com/static/56e2e0c520c6472a2586add2/t/594d23b7e6f2e1d4a11b69a3/1498231447084/?format=500w" alt="">
+      </router-link>
+    </li>
+    <li class=" uk-active uk-logo"><router-link to="/" >Admin</router-link></li>
+    <li class="uk-nav-divider"></li>
+    <li class=" uk-active">{{user}}</li>
+    <li class="uk-nav-divider"></li>
+    <li class=" uk-active"><router-link to="/signup" >Register</router-link></li>
+    <li class="uk-nav-divider"></li>
+    <li class="uk-nav-header" v-on:click="logOut">LogOut</li>
+  </ul>
 
-    <vk-navbar-nav>
-      <li class="uk-parent uk-active uk-logo"><router-link to="/" >
-        <img class="nav-logo"
-             src="https://static1.squarespace.com/static/56e2e0c520c6472a2586add2/t/594d23b7e6f2e1d4a11b69a3/1498231447084/?format=500w" alt="">
-      </router-link></li>
-    </vk-navbar-nav>
-
-    <vk-navbar-nav slot="center">
-      <li class="uk-parent uk-active uk-logo"><router-link to="/" >Admin</router-link></li>
-    </vk-navbar-nav>
-
-
-    <vk-navbar-nav slot="right">
-
-      <!--<li v-show="!logged" class="uk-parent"><router-link to="/login" >Log In</router-link></li>-->
-
-      <vk-navbar-nav-dropdown title="Admin" v-show="logged">
-        <vk-navbar-nav-dropdown-nav>
-          <li class="uk-parent uk-active">{{user}}</li>
-
-          <li class="uk-parent uk-active"><router-link to="/admin/" >Admin</router-link></li>
-          <li class="uk-parent uk-active"><router-link to="/signup" >Register</router-link></li>
-          <vk-nav-item-divider></vk-nav-item-divider>
-
-          <vk-nav-item title="Log Out" active v-on:click="logOut"></vk-nav-item>
-        </vk-navbar-nav-dropdown-nav>
-      </vk-navbar-nav-dropdown>
-
-
-    </vk-navbar-nav>
-
-  </vk-navbar>
 </template>
 
 <script>

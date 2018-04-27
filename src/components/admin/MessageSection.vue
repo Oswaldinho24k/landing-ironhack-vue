@@ -84,7 +84,7 @@
     },
     methods:{
       getData:function(){
-        firebase.database().ref('landing/message').on('value', (res)=>{
+        firebase.database().ref(`/pages/${this.$route.params.page}/message`).on('value', (res)=>{
           console.log(res.val())
           this.message = res.val()
         })
@@ -94,7 +94,7 @@
       },
       saveData:function(e){
         e.preventDefault()
-        firebase.database().ref('landing/message').set(this.message)
+        firebase.database().ref(`/pages/${this.$route.params.page}/message`).set(this.message)
           .then(r=>{
             this.messages.push({message:` Info de esta sección actualizada ;)`, status:'success'})
           }).catch(e=>{
