@@ -4,12 +4,6 @@
       <h3>SIGN UP</h3>
       <form v-on:submit="signUp">
 
-        <p v-if="errors.length">
-          <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
-        </p>
         <vk-notification :messages.sync="messages">
           <div slot-scope="{ message }">
             {{ message }}
@@ -19,20 +13,20 @@
         <div class="uk-margin">
           <div class="uk-inline">
             <span class="uk-form-icon" ><vk-icon icon="world"></vk-icon></span>
-            <input class="uk-input" type="email" v-model="user.email">
+            <input class="uk-input" type="email" v-model="newUser.email">
           </div>
         </div>
 
         <div class="uk-margin">
           <div class="uk-inline">
             <span class="uk-form-icon" ><vk-icon icon="lock"></vk-icon></span>
-            <input class="uk-input" type="password" v-model="user.password">
+            <input class="uk-input" type="password" v-model="newUser.password">
           </div>
         </div>
         <div class="uk-margin">
           <div class="uk-inline">
             <span class="uk-form-icon"><vk-icon icon="lock"></vk-icon></span>
-            <input class="uk-input" type="password" v-model="user.password2">
+            <input class="uk-input" type="password" v-model="newUser.password2">
           </div>
         </div>
         <div class="uk-margin">
@@ -47,20 +41,23 @@
 
 <script>
   import firebase from 'firebase'
+  import {secondaryApp} from '../../main'
   export default {
     name: 'Signup',
     data () {
       return {
         errors:[],
         messages:[],
-        user:{
+        user:{},
+        newUser:{
           email:'',
-          password:''
-        }
+          password:'',
+          password2:''
+        },
       }
     },
     beforeMount(){
-      this.checkIfUser()
+      //this.checkIfUser()
     },
     methods: {
       checkIfUser:function(){
@@ -88,10 +85,9 @@
         if(this.user.password2!==this.user.password){
           this.errors.push('Las contraseñas no coinciden')
         }else{
-          firebase.auth().createUserWithEmailAndPassword(
-
-          )
+          secondaryApp.auth().createUserWithEmailAndPassword(this.newUser.email, this.newUser.password2)
             .then(r=>{
+              this.newUser={}
               let user = {
                 uid:r.uid,
                 email:r.email

@@ -119,9 +119,9 @@
         updates[`/pages/${this.$route.params.page}/testimonials/list/${key}`] = null;
         firebase.database().ref().update(updates)
           .then(r=>{
-            firebase.storage().ref(`testimonials/${key}`).delete()
+            firebase.storage().ref(`/pages/${this.$route.params.page}/testimonials/${key}`).delete()
               .then(r=>{
-
+                this.messages.push({message:'Deleted', status:'success'})
               }).catch(e=>{
               this.messages.push({message:` ${e.message}`, status:'danger'})
             })

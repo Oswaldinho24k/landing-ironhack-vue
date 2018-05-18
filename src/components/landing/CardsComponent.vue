@@ -2,11 +2,11 @@
  <div v-show="show">
    <div class="uk-child-width-expand@s uk-text-center" uk-grid style="padding: 2% 5%; margin-bottom: 30px;" >
      <div v-for="item in list">
-       <div class="uk-card uk-card-default uk-grid-margin myclass" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
-         <div class="uk-card-media-top">
-           <img :src="item.image" alt="">
+       <div class="uk-card uk-card-default uk-grid-margin perro" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
+         <div class="uk-card-media-top myclass">
+           <img :src="item.image" alt="" >
          </div>
-         <div class="uk-card-body">
+         <div class=" uk-card-body" >
            <h3 class="uk-card-title">{{item.title}}</h3>
            <p>{{item.text}}</p>
          </div>
@@ -30,8 +30,12 @@
 <style scoped>
 
   .myclass{
-    height: 500px;
-    overflow-y: hidden;
+    height: 200px;
+    overflow: hidden;
+  }
+  .perro{
+    height: 400px;
+    overflow: hidden;
   }
 
 

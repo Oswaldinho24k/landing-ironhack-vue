@@ -11,7 +11,7 @@
 
 
       </div>
-      <div class="contenido">
+      <div>
         <h1>Editando la página {{pagina}}</h1>
       </div>
 

@@ -28,6 +28,8 @@ const config = {
 };
 firebase.initializeApp(config);
 
+export const secondaryApp = firebase.initializeApp(config, "Secondary");
+
 router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
